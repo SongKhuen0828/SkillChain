@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { 
   Brain, 
   CheckCircle2,
-  XCircle,
+  // XCircle, // Not used
   RefreshCw,
   Zap,
   MessageSquare,
@@ -18,9 +18,9 @@ import {
   Target,
   Activity,
   Sparkles,
-  ArrowRight,
+  // ArrowRight, // Not used
   GraduationCap,
-  Timer,
+  // Timer, // Not used
   BookOpen,
   ChevronRight
 } from 'lucide-react';

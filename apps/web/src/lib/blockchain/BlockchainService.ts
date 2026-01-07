@@ -3,7 +3,7 @@
  * Supports both Real Blockchain and Simulation modes
  */
 
-import { supabase } from '@/lib/supabase';
+// import { supabase } from '@/lib/supabase'; // Not used in this file
 
 export interface MintResult {
   transactionHash: string;
@@ -35,9 +35,9 @@ function generateSimulatedTokenId(): bigint {
  * Returns a realistic transaction hash after a delay
  */
 async function simulateMinting(
-  studentAddress: string,
-  courseTitle: string,
-  metadataURI: string
+  _studentAddress: string,
+  _courseTitle: string,
+  _metadataURI: string
 ): Promise<MintResult> {
   // Simulate network delay (3 seconds)
   await new Promise(resolve => setTimeout(resolve, 3000));

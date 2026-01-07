@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { Loader2, CheckCircle2, XCircle, ArrowLeft, Trophy, AlertCircle } from 'lucide-react'
+import { Loader2, XCircle, ArrowLeft, Trophy, AlertCircle } from 'lucide-react'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { triggerRecalculationAfterQuiz } from '@/lib/ai/studyPlanner'
@@ -17,7 +17,7 @@ export default function QuizPlayerPage() {
   const [quiz, setQuiz] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [answers, setAnswers] = useState<Record<string, any>>({})
-  const [result, setResult] = useState<{ score: number, passed: boolean, details?: any[] } | null>(null)
+  const [result, setResult] = useState<{ score: number, passed: boolean, details?: any[], totalScore?: number, totalPoints?: number } | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [timeLeft, setTimeLeft] = useState(60 * 60) // Countdown in seconds (default 60 mins)
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -271,8 +271,9 @@ export default function QuizPlayerPage() {
             .eq('id', quiz.lesson_id)
             .single()
           
-          if (lessonData?.modules?.course_id) {
-            triggerRecalculationAfterQuiz(user.id, lessonData.modules.course_id).catch(err => {
+          const courseId = Array.isArray(lessonData?.modules) ? lessonData.modules[0]?.course_id : lessonData?.modules?.course_id;
+          if (courseId) {
+            triggerRecalculationAfterQuiz(user.id, courseId).catch(err => {
               console.error('Failed to trigger schedule recalculation:', err)
             })
           }

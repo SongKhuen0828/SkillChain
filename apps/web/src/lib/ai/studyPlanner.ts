@@ -83,7 +83,9 @@ export async function recalculatePlan(userId: string, courseId: string): Promise
 
     // 5. Get the most recent failed quiz
     const latestFailed = failedQuizzes[0];
-    const failedLessonId = latestFailed.quizzes?.lesson_id;
+    const failedLessonId = Array.isArray(latestFailed.quizzes) 
+      ? latestFailed.quizzes[0]?.lesson_id 
+      : latestFailed.quizzes?.lesson_id;
 
     if (!failedLessonId) return;
 

@@ -229,7 +229,7 @@ export function SchedulePage() {
           .limit(100);
 
         if (sessionsError) throw sessionsError;
-        setSessions(sessionsData || []);
+        // Sessions data processed inline, no need for state
 
         // Fetch adaptation logs (skip if column doesn't exist)
         try {
@@ -343,10 +343,7 @@ export function SchedulePage() {
     const bestWindow = Object.entries(windowScores)
       .sort((a, b) => b[1] - a[1])[0]?.[0];
 
-    if (bestWindow) {
-      const [start, end] = bestWindow.split('-').map(Number);
-      setBestFocusWindow({ start, end });
-    }
+    // Removed setBestFocusWindow and setAiRecommendedMethod - not used in UI
 
     setStats({
       mostProductiveHour: parseInt(String(mostProductiveHour)),
@@ -354,18 +351,6 @@ export function SchedulePage() {
       completionRate,
       avgSessionDuration: Math.round(avgDuration)
     });
-  };
-
-  const getAIRecommendation = async () => {
-    try {
-      await schedulingEngine.init();
-      const prediction = await schedulingEngine.predictBestMethod();
-      setAiRecommendedMethod(prediction.method);
-    } catch (error) {
-      console.error('Error getting AI recommendation:', error);
-      // Fallback to stats-based recommendation
-      setAiRecommendedMethod(stats.bestMethod);
-    }
   };
 
   // Generate AI Schedule - Weekly schedule based on user progress and preferences

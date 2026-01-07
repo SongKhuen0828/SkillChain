@@ -71,7 +71,17 @@ export function Certificates() {
         .order('created_at', { ascending: false })
 
       if (certError) throw certError
-      setCertificates(certData || [])
+      // Transform data to match Certificate interface
+      const transformedCerts: Certificate[] = (certData || []).map((c: any) => ({
+        id: c.id,
+        course_id: c.course_id,
+        tx_hash: c.tx_hash,
+        ipfs_hash: c.ipfs_hash,
+        minted_at: c.minted_at,
+        created_at: c.created_at,
+        courses: Array.isArray(c.courses) ? c.courses[0] : c.courses,
+      }));
+      setCertificates(transformedCerts)
 
       // Find courses that are 100% complete but don't have certificates
       const certCourseIds = new Set((certData || []).map(c => c.course_id))
@@ -163,7 +173,7 @@ export function Certificates() {
   }, [user])
 
   // Handle manual minting
-  const handleMintCertificate = async (courseId: string, courseTitle: string) => {
+  const handleMintCertificate = async (courseId: string, _courseTitle: string) => {
     if (!user || minting) return
 
     setMinting(courseId)

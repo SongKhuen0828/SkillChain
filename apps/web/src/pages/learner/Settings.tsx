@@ -808,8 +808,9 @@ export function Settings() {
                               }
                               
                               if (membership?.organizations && !Array.isArray(membership.organizations) && typeof membership.organizations === 'object' && 'name' in membership.organizations) {
-                                setCurrentOrg(membership.organizations)
-                                toast.success(`Welcome to ${membership.organizations.name}!`)
+                                const org = membership.organizations as { id: string; name: string; logo_url: string | null };
+                                setCurrentOrg(org)
+                                toast.success(`Welcome to ${org.name}!`)
                               } else {
                                 // If membership not found, try refreshing again
                                 setTimeout(async () => {

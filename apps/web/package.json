@@ -28,6 +28,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@supabase/supabase-js": "^2.45.4",
     "@tensorflow/tfjs": "^4.22.0",
     "@types/crypto-js": "^4.2.2",

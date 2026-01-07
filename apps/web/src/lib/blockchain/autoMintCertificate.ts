@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { checkCourseCompletion, cleanupCertificateElement } from "@/lib/certificate";
 import { uploadImageToIPFS, uploadMetadataToIPFS, getIPFSUri } from "@/lib/ipfs/pinata";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf"; // Not used
 
 /**
  * Automatically mint a certificate NFT when a course is completed

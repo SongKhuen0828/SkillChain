@@ -38,7 +38,7 @@ export const analyzeProductivity = (sessions: Session[]): ProductivityAnalysis =
     // Handle both boolean and number completion status
     const isCompleted = typeof s.is_completed === 'boolean' 
       ? s.is_completed 
-      : s.is_completed === 1 || s.is_completed === true;
+      : (typeof s.is_completed === 'number' && s.is_completed === 1);
     
     // Use method_used if method is not available
     const method = s.method || s.method_used || 'unknown';
@@ -101,7 +101,7 @@ export const analyzeProductivity = (sessions: Session[]): ProductivityAnalysis =
   const totalCompleted = sessions.filter(s => {
     const completed = typeof s.is_completed === 'boolean' 
       ? s.is_completed 
-      : s.is_completed === 1 || s.is_completed === true;
+      : (typeof s.is_completed === 'number' && s.is_completed === 1);
     return completed;
   }).length;
   const averageSuccessRate = sessions.length > 0 ? totalCompleted / sessions.length : 0;

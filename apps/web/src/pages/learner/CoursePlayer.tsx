@@ -223,9 +223,9 @@ export default function CoursePlayer() {
                 order_index: 0,
                 lessons: directCourseData.lessons
               }]
-            }
+            } as any
           } else {
-            courseData = directCourseData
+            courseData = directCourseData as any
           }
         }
 
@@ -385,6 +385,7 @@ export default function CoursePlayer() {
   }, [currentLesson?.id, course]) // Only refetch if the lesson ID changes
 
   // Handle video exit (when video ends or user navigates away)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleVideoExit = () => {
     if (!currentLesson || !sessionStartTime) return
     setIsExiting(true)
@@ -556,11 +557,9 @@ export default function CoursePlayer() {
   const isLessonAccessible = (lessonId: string): boolean => {
     if (!course?.modules) return true
     
-    let foundTarget = false
     for (const module of course.modules) {
       for (const lesson of module.lessons || []) {
         if (lesson.id === lessonId) {
-          foundTarget = true
           return true // All previous lessons were completed
         }
         // If previous lesson is not completed, subsequent lessons are locked

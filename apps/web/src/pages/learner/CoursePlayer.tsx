@@ -385,12 +385,12 @@ export default function CoursePlayer() {
   }, [currentLesson?.id, course]) // Only refetch if the lesson ID changes
 
   // Handle video exit (when video ends or user navigates away)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleVideoExit = () => {
-    if (!currentLesson || !sessionStartTime) return
-    setIsExiting(true)
-    setShowExitReasonDialog(true)
-  }
+  // Note: Function defined but not currently used in UI
+  // const handleVideoExit = () => {
+  //   if (!currentLesson || !sessionStartTime) return
+  //   setIsExiting(true)
+  //   setShowExitReasonDialog(true)
+  // }
   
   // Save exit reason and mark as complete
   const handleSaveExitReason = async () => {

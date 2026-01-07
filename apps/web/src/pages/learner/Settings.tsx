@@ -252,7 +252,8 @@ export function Settings() {
     return labels[goal] || goal
   }
 
-  const getFocusModeLabel = (struggle: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getFocusModeLabel = (_struggle: string) => {
     if (struggle === 'none') return 'Flowtime'
     if (struggle === 'distraction') return 'Pomodoro'
     if (struggle === 'procrastination') return '5-Min Rule'

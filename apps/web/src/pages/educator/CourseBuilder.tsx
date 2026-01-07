@@ -38,7 +38,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { Plus, Video, PlayCircle, Trash2, ArrowLeft, Save, Loader2, Link as LinkIcon, Upload, UploadCloud, Rocket, Lock, FileText, X, CheckCircle2, ExternalLink, Pencil, HelpCircle, Check, Image as ImageIcon } from 'lucide-react'
+import { Plus, Video, PlayCircle, Trash2, ArrowLeft, Save, Loader2, UploadCloud, Rocket, Lock, FileText, X, CheckCircle2, ExternalLink, Pencil, HelpCircle, Check, Image as ImageIcon } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 
@@ -452,7 +452,7 @@ export default function CourseBuilder() {
       // 1. Upload Image if changed
       if (courseForm.thumbnailFile) {
         const file = courseForm.thumbnailFile
-        const fileExt = file.name.split('.').pop()
+        // const fileExt = file.name.split('.').pop() // Not used
         const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
         const filePath = `thumbnails/${courseId}/${fileName}`
         
@@ -1329,7 +1329,7 @@ export default function CourseBuilder() {
                 <AccordionContent>
                   <div className="pt-4 pb-2 space-y-2">
                     {module.lessons && module.lessons.length > 0 ? (
-                      module.lessons.map((lesson, lessonIndex) => (
+                      module.lessons.map((lesson, _lessonIndex) => (
                         <div
                           key={lesson.id}
                           className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-white/10"

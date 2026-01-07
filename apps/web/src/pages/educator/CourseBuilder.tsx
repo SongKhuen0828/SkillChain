@@ -1972,7 +1972,7 @@ export default function CourseBuilder() {
                       <div className="space-y-2">
                         <Label className="text-xs text-slate-400 flex items-center gap-2">
                           AI Scoring Criteria
-                          <HelpCircle className="h-3 w-3 text-slate-500" title="The AI will use this to grade student answers" />
+                          <HelpCircle className="h-3 w-3 text-slate-500" />
                         </Label>
                         <Textarea
                           placeholder="e.g. Keywords to look for: blockchain, decentralized, ledger. Student should explain consensus mechanisms..."

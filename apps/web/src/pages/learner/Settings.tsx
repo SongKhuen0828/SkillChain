@@ -257,7 +257,7 @@ export function Settings() {
     if (_struggle === 'none') return 'Flowtime'
     if (_struggle === 'distraction') return 'Pomodoro'
     if (_struggle === 'procrastination') return '5-Min Rule'
-    if (struggle === 'fatigue') return '52/17 Rule'
+    if (_struggle === 'fatigue') return '52/17 Rule'
     return 'Pomodoro'
   }
 

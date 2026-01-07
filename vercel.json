@@ -5,6 +5,12 @@
   "devCommand": "cd apps/web && npm run dev",
   "installCommand": "cd apps/web && npm install",
   "framework": "vite",
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet apps/web/",
   "rewrites": [
     {
       "source": "/(.*)",

@@ -29,14 +29,14 @@ interface PlatformStats {
   pendingVerifications: number;
 }
 
-interface RecentActivity {
-  type: 'user' | 'course' | 'certificate' | 'org';
-  message: string;
-  timestamp: string;
-}
+// interface RecentActivity {
+//   type: 'user' | 'course' | 'certificate' | 'org';
+//   message: string;
+//   timestamp: string;
+// } // Not used
 
 export function AdminDashboard() {
-  const { profile } = useAuth();
+  const { profile: _profile } = useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<PlatformStats>({
     totalUsers: 0,

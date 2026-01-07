@@ -21,7 +21,7 @@ import {
   Key,
   Send,
   Sparkles,
-  TrendingUp,
+  // TrendingUp, // Not used
   Calendar
 } from 'lucide-react';
 import { toast } from 'sonner';

@@ -18,8 +18,8 @@ import {
   Building2, 
   Mail, 
   User, 
-  Phone, 
-  Globe, 
+  // Phone, // Not used
+  // Globe, // Not used 
   // Users, // Not used
   Calendar,
   CheckCircle2,

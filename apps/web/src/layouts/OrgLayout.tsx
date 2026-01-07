@@ -9,7 +9,7 @@ import { SafeAvatar } from '@/components/ui/SafeAvatar';
 import { supabase } from '@/lib/supabase';
 import { 
   ChevronDown, 
-  User, 
+  // User, // Not used 
   Settings, 
   LogOut, 
   Loader2 

@@ -21,8 +21,8 @@ import { FocusTimer } from '@/components/FocusTimer'
 import { schedulingEngine } from '@/lib/ai/AdaptiveSchedulingEngine'
 import { 
   PlayCircle, FileText, CheckCircle, 
-  Download, Trophy, ArrowRight, Lock, 
-  MessageSquare, Star, Send 
+  Download, Trophy, Lock, 
+  Star, Send 
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'

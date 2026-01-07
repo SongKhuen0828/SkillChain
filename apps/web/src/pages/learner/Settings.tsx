@@ -252,14 +252,14 @@ export function Settings() {
     return labels[goal] || goal
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const getFocusModeLabel = (_struggle: string) => {
-    if (_struggle === 'none') return 'Flowtime'
-    if (_struggle === 'distraction') return 'Pomodoro'
-    if (_struggle === 'procrastination') return '5-Min Rule'
-    if (_struggle === 'fatigue') return '52/17 Rule'
-    return 'Pomodoro'
-  }
+  // Note: Function defined but not currently used
+  // const getFocusModeLabel = (_struggle: string) => {
+  //   if (_struggle === 'none') return 'Flowtime'
+  //   if (_struggle === 'distraction') return 'Pomodoro'
+  //   if (_struggle === 'procrastination') return '5-Min Rule'
+  //   if (_struggle === 'fatigue') return '52/17 Rule'
+  //   return 'Pomodoro'
+  // }
 
   const handleChangePassword = async () => {
     if (!currentPassword || !newPassword || !confirmNewPassword) {

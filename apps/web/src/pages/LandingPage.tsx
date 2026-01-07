@@ -19,7 +19,7 @@ import {
   Brain
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+// import { toast } from 'sonner'; // Not used
 import FloatingLines from '@/components/FloatingLines';
 import { motion } from 'framer-motion';
 

@@ -19,7 +19,6 @@ import {
   Users,
   AlertCircle,
   Globe,
-  Mail,
   Search,
   GraduationCap,
   Send

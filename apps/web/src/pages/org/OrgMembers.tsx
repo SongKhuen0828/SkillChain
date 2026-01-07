@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
   AlertDialog,
@@ -21,7 +20,6 @@ import {
   Users, 
   Search, 
   GraduationCap,
-  Clock,
   Award,
   TrendingUp,
   UserMinus,

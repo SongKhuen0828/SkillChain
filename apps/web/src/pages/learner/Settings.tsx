@@ -795,6 +795,8 @@ export function Settings() {
                               }
                               
                               // Fetch updated org membership
+                              if (!user) return;
+                              
                               const { data: membership, error: membershipError } = await supabase
                                 .from('org_members')
                                 .select('org_id, organizations(id, name, logo_url)')
@@ -805,18 +807,19 @@ export function Settings() {
                                 console.error('Error fetching membership:', membershipError)
                               }
                               
-                              if (membership?.organizations) {
+                              if (membership?.organizations && !Array.isArray(membership.organizations)) {
                                 setCurrentOrg(membership.organizations)
                                 toast.success(`Welcome to ${membership.organizations.name}!`)
                               } else {
                                 // If membership not found, try refreshing again
                                 setTimeout(async () => {
+                                  if (!user) return;
                                   const { data: retryMembership } = await supabase
                                     .from('org_members')
                                     .select('org_id, organizations(id, name, logo_url)')
                                     .eq('user_id', user.id)
                                     .maybeSingle()
-                                  if (retryMembership?.organizations) {
+                                  if (retryMembership?.organizations && !Array.isArray(retryMembership.organizations)) {
                                     setCurrentOrg(retryMembership.organizations)
                                   }
                                 }, 1000)

@@ -9,10 +9,8 @@ import {
   XCircle, 
   ExternalLink, 
   Shield, 
-  Award,
   GraduationCap,
-  Building2,
-  User
+  Building2
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -87,31 +85,45 @@ export function Verify() {
           return;
         }
 
+        // Handle array responses from Supabase
+        const courseData = Array.isArray(data.courses) ? data.courses[0] : data.courses;
+        const profileData = Array.isArray(data.profiles) ? data.profiles[0] : data.profiles;
+
         // Fetch organization if course has org_id
         let orgData = null;
-        if (data.courses?.org_id) {
+        if (courseData?.org_id) {
           const { data: org } = await supabase
             .from('organizations')
             .select('name, logo_url')
-            .eq('id', data.courses.org_id)
+            .eq('id', courseData.org_id)
             .single();
           orgData = org;
         }
 
         // Fetch educator if course has educator_id
         let educatorData = null;
-        if (data.courses?.educator_id) {
+        if (courseData?.educator_id) {
           const { data: educator } = await supabase
             .from('profiles')
             .select('full_name')
-            .eq('id', data.courses.educator_id)
+            .eq('id', courseData.educator_id)
             .single();
           educatorData = educator;
         }
 
         // Transform the data to match our interface
         const transformedData: CertificateData = {
-          ...data,
+          id: data.id,
+          tx_hash: data.tx_hash,
+          minted_at: data.minted_at,
+          created_at: data.created_at,
+          profiles: profileData ? { full_name: profileData.full_name } : null,
+          courses: courseData ? {
+            title: courseData.title,
+            description: courseData.description,
+            org_id: courseData.org_id,
+            educator_id: courseData.educator_id,
+          } : null,
           organization: orgData,
           educator: educatorData,
         };
@@ -231,14 +243,6 @@ export function Verify() {
                   }
                 </p>
               </div>
-              {certificate.token_id && (
-                <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Token ID</p>
-                  <p className="text-lg font-semibold text-slate-900 dark:text-white">
-                    #{certificate.token_id}
-                  </p>
-                </div>
-              )}
             </CardContent>
           </Card>
 

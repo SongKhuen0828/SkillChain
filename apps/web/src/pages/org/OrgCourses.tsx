@@ -129,8 +129,7 @@ export function OrgCourses() {
 
   const filteredCourses = courses.filter(course => {
     const matchesSearch = 
-      course.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.educator_name?.toLowerCase().includes(searchQuery.toLowerCase());
+      course.title?.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (filter === 'all') return matchesSearch;
     return matchesSearch && course.status === filter;

@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+apps/web/node_modules/
+
+# Build outputs
+dist/
+apps/web/dist/
+build/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# Contracts
+artifacts/
+cache/
+typechain-types/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+backend/venv/
+packages/ai-engine/venv/
+
+# Other
+coverage/
+.nyc_output/
+

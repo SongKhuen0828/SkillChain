@@ -1,0 +1,28 @@
+{
+  "name": "skillchain-certificates",
+  "version": "1.0.0",
+  "description": "SkillChain Certificate Smart Contract (ERC-721)",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:amoy": "hardhat run scripts/deploy-certificate.ts --network polygon-amoy",
+    "deploy:mainnet": "hardhat run scripts/deploy-certificate.ts --network polygon",
+    "deploy:local": "hardhat run scripts/deploy-certificate.ts --network hardhat",
+    "verify": "hardhat verify --network polygon-amoy",
+    "verify:mainnet": "hardhat verify --network polygon"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.2.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@supabase/supabase-js": "^2.89.0",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.6.1",
+    "hardhat": "^2.19.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "qrcode.react": "^4.2.0"
+  }
+}

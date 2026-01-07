@@ -281,7 +281,6 @@ serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const resendApiKey = Deno.env.get("RESEND_API_KEY");
 
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error("Missing required environment variables");
@@ -491,42 +490,7 @@ serve(async (req) => {
       }
     }
     
-    // Fallback to Resend (if SendGrid failed or not configured)
-    if (!emailSent && resendApiKey) {
-      try {
-        const fromEmail = Deno.env.get("RESEND_FROM_EMAIL") || "SkillChain <onboarding@resend.dev>";
-        
-        const emailResponse = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [contactEmail],
-            subject: emailSubject,
-            html: emailHtml,
-          }),
-        });
-
-        if (emailResponse.ok) {
-          const responseData = await emailResponse.json();
-          emailSent = true;
-          emailProvider = "Resend";
-          console.log("Welcome email sent successfully via Resend:", responseData);
-        } else {
-          const errorText = await emailResponse.text();
-          emailError = `Resend API error: ${errorText}`;
-          console.error("Failed to send email via Resend:", errorText);
-        }
-      } catch (err) {
-        emailError = `Resend error: ${err.message || "Unknown error"}`;
-        console.error("Error sending email via Resend:", err);
-      }
-    }
-    
-    // Fallback to SMTP (if both SendGrid and Resend failed or not configured)
+    // Fallback to SMTP (if SendGrid failed or not configured)
     if (!emailSent) {
       const smtpHost = Deno.env.get("SMTP_HOST");
       const smtpUser = Deno.env.get("SMTP_USER");
@@ -565,7 +529,7 @@ serve(async (req) => {
     }
     
     if (!emailSent && !emailError) {
-      emailError = "No email service configured. Please set SENDGRID_API_KEY, RESEND_API_KEY, or SMTP credentials.";
+      emailError = "No email service configured. Please set SENDGRID_API_KEY or SMTP credentials.";
       console.log("No email service configured, skipping email");
     }
 

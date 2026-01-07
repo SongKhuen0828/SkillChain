@@ -663,7 +663,7 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
     }
 
     // MAIN INIT
-    const _myApp = new App(container, mergedOptions)
+    new App(container, mergedOptions)
     return () => {
       // Simple Cleanup
       while (container.firstChild) container.removeChild(container.firstChild)

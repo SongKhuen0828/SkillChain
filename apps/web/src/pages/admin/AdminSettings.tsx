@@ -11,9 +11,9 @@ import {
   Settings, 
   Globe, 
   Shield, 
-  Bell, 
+  // Bell, // Not used 
   Database, 
-  Cloud,
+  // Cloud, // Not used
   Link as LinkIcon,
   Key,
   // Palette, // Not used

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
-import { schedulingEngine } from '@/lib/ai/AdaptiveSchedulingEngine';
+// import { schedulingEngine } from '@/lib/ai/AdaptiveSchedulingEngine'; // Not used directly
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -262,7 +262,7 @@ export function SchedulePage() {
         calculateStats(sessionsData || []);
 
         // Get AI recommended method for current hour
-        await getAIRecommendation();
+        // await getAIRecommendation(); // Function removed, using stats-based recommendation
 
       } catch (error) {
         console.error('Error fetching schedule data:', error);
@@ -339,7 +339,7 @@ export function SchedulePage() {
       }
     });
 
-    const bestWindow = Object.entries(windowScores)
+    const _bestWindow = Object.entries(windowScores)
       .sort((a, b) => b[1] - a[1])[0]?.[0];
 
     // Removed setBestFocusWindow and setAiRecommendedMethod - not used in UI

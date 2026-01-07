@@ -1337,13 +1337,13 @@ export default function CourseBuilder() {
                           <div className="flex items-center gap-3 flex-1 min-w-0">
                             <div className="flex items-center gap-2 shrink-0">
                               {lesson.content_url ? (
-                                <Video className="w-5 h-5 text-cyan-600 dark:text-cyan-400" title="Video content available" />
+                                <Video className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
                               ) : null}
                               {lesson.resource_url ? (
-                                <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" title="Resource file available" />
+                                <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                               ) : null}
                               {!lesson.content_url && !lesson.resource_url && (
-                                <PlayCircle className="w-5 h-5 text-slate-400" title="No content" />
+                                <PlayCircle className="w-5 h-5 text-slate-400" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">

@@ -271,7 +271,8 @@ export default function QuizPlayerPage() {
             .eq('id', quiz.lesson_id)
             .single()
           
-          const courseId = Array.isArray(lessonData?.modules) ? lessonData.modules[0]?.course_id : lessonData?.modules?.course_id;
+          const modules = lessonData?.modules as any;
+          const courseId = Array.isArray(modules) ? modules[0]?.course_id : modules?.course_id;
           if (courseId) {
             triggerRecalculationAfterQuiz(user.id, courseId).catch(err => {
               console.error('Failed to trigger schedule recalculation:', err)

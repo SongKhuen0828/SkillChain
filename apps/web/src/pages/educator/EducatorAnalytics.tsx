@@ -24,8 +24,8 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line,
+  // LineChart, // Not used
+  // Line, // Not used
   Area,
   AreaChart,
   Legend

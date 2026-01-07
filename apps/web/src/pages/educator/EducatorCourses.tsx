@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { CourseThumbnail } from '@/components/CourseThumbnail'
-import { Plus, BookOpen, Search, Loader2, Trash2, LayoutGrid, List } from 'lucide-react'
+import { Plus, BookOpen, Search, Trash2, LayoutGrid, List } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface Course {

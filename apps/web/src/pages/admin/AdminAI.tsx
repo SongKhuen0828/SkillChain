@@ -217,17 +217,17 @@ export function AdminAI() {
       setTrainingStatus({
         scheduling: { 
           training: false, 
-          metrics: results.scheduling.metrics,
+          metrics: results.scheduling.metrics as ModelMetrics | undefined,
           progress: results.scheduling.success ? 100 : 0
         },
         recommendation: { 
           training: false, 
-          metrics: results.recommendation.metrics,
+          metrics: results.recommendation.metrics as ModelMetrics | undefined,
           progress: results.recommendation.success ? 100 : 0
         },
         performance: { 
           training: false, 
-          metrics: results.performance.metrics,
+          metrics: results.performance.metrics as ModelMetrics | undefined,
           progress: results.performance.success ? 100 : 0
         },
       });

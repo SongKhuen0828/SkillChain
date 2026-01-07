@@ -28,7 +28,7 @@ export function AdminBlockchain() {
   });
   
   // Environment variables (read-only display)
-  const [config, setConfig] = useState({
+  const [config, _setConfig] = useState({
     contractAddress: import.meta.env.VITE_CERTIFICATE_CONTRACT_ADDRESS || '',
     networkName: import.meta.env.VITE_NETWORK_NAME || 'Polygon Mainnet',
     rpcUrl: import.meta.env.VITE_POLYGON_RPC_URL || '',

@@ -133,26 +133,22 @@ export async function mintCertificateNFT(
  * @returns The token ID if certificate exists, null otherwise
  */
 export async function checkCertificateOnChain(
-  studentWalletAddress: string,
-  courseId: string,
-  contractAddress: string
+  _studentWalletAddress: string,
+  _courseId: string,
+  _contractAddress: string
 ): Promise<bigint | null> {
   try {
-    const contract = getContract({
-      client,
-      chain: polygonAmoy,
-      address: contractAddress,
-    });
-
-    // Call the contract's getCertificateTokenId function
-    // Note: This function may not exist in the contract, using alternative approach
+    // TODO: Implement proper certificate checking
+    // const contract = getContract({
+    //   client,
+    //   chain: polygonAmoy,
+    //   address: contractAddress,
+    // });
     // const tokenId = await contract.read("getCertificateTokenId", [
     //   studentWalletAddress,
     //   courseId,
     // ]);
-    const tokenId = null; // TODO: Implement proper token ID retrieval
-
-    return tokenId && tokenId > 0n ? tokenId : null;
+    return null;
   } catch (error) {
     console.error("Error checking certificate on-chain:", error);
     return null;
@@ -167,20 +163,18 @@ export async function checkCertificateOnChain(
  * @returns The IPFS metadata URI
  */
 export async function getCertificateMetadataURI(
-  tokenId: bigint,
-  contractAddress: string
+  _tokenId: bigint,
+  _contractAddress: string
 ): Promise<string | null> {
   try {
-    const contract = getContract({
-      client,
-      chain: polygonAmoy,
-      address: contractAddress,
-    });
-
-    // Note: Contract read method may need different syntax
+    // TODO: Implement proper metadata URI retrieval
+    // const contract = getContract({
+    //   client,
+    //   chain: polygonAmoy,
+    //   address: contractAddress,
+    // });
     // const uri = await contract.read("tokenURI", [tokenId]);
-    const uri = null; // TODO: Implement proper URI retrieval
-    return uri || null;
+    return null;
   } catch (error) {
     console.error("Error getting certificate metadata URI:", error);
     return null;

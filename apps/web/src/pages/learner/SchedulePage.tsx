@@ -20,11 +20,10 @@ import {
   BarChart3,
   Target,
   ArrowRight,
-  Zap,
   RefreshCw,
   ChevronDown
 } from 'lucide-react';
-import { format, addDays, startOfDay, isToday, parseISO, startOfWeek, endOfWeek } from 'date-fns';
+import { format, addDays, startOfDay, isToday, parseISO } from 'date-fns';
 import { cn } from '@/lib/utils';
 
 interface StudyPlan {

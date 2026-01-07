@@ -129,7 +129,7 @@ export async function getModelMetrics(modelType?: ModelType): Promise<Array<Trai
  * Check if training data is sufficient for a model
  */
 export async function checkTrainingDataAvailability(
-  modelType: ModelType,
+  _modelType: ModelType,
   userId?: string
 ): Promise<{ sufficient: boolean; count: number; required: number }> {
   try {

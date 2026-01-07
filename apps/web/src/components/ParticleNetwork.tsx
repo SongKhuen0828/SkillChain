@@ -30,7 +30,7 @@ export function ParticleNetwork({
   const { resolvedTheme } = useTheme()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const packetsRef = useRef<DataPacket[]>([])
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>()
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({
     x: 0,
     y: 0,

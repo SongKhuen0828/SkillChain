@@ -15,7 +15,7 @@ export function FocusTimer({
   userId, 
   courseId,
   lessonId,
-  lessonType,
+  lessonType: _lessonType,
   recommendedMethod,
   autoStart = false,
   onLockStateChange

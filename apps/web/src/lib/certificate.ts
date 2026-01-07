@@ -274,7 +274,7 @@ export async function updateEnrollmentStatus(
             if (!certificateElement) {
               certificateElement = await createCertificateElement(
                 studentName,
-                courseTitle,
+                courseTitle || 'Course',
                 new Date().toISOString().split('T')[0],
                 educatorName,
                 theme,

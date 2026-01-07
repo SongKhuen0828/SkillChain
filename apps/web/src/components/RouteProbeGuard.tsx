@@ -45,7 +45,7 @@ export function RouteProbeGuard({ children }: RouteProbeGuardProps) {
 
   // Show loading only briefly during probe
   if (probing && location.pathname !== '/') {
-    return <LoadingScreen message="Checking route data..." />;
+    return <LoadingScreen />;
   }
 
   // If probe failed but we want to continue anyway (non-blocking)

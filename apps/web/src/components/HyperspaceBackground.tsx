@@ -23,7 +23,7 @@ export function HyperspaceBackground({
   const { resolvedTheme } = useTheme()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const starsRef = useRef<Star[]>([])
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>()
   const mouseRef = useRef<{ x: number; y: number }>({
     x: 0,
     y: 0,

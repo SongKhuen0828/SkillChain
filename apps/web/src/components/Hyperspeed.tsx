@@ -1,4 +1,4 @@
-import { useEffect, useRef, FC } from 'react'
+import { useEffect, useRef, type FC } from 'react'
 import * as THREE from 'three'
 import {
   BloomEffect,
@@ -454,7 +454,7 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
         this.webgl = webgl
         this.options = options
       }
-      createPlane(side: number, width: number, isRoad: boolean) {
+      createPlane(side: number, _width: number, isRoad: boolean) {
         const geometry = new THREE.PlaneGeometry(
           isRoad ? this.options.roadWidth : this.options.islandWidth,
           this.options.length,
@@ -663,7 +663,7 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
     }
 
     // MAIN INIT
-    const myApp = new App(container, mergedOptions)
+    const _myApp = new App(container, mergedOptions)
     return () => {
       // Simple Cleanup
       while (container.firstChild) container.removeChild(container.firstChild)

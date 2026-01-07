@@ -5,10 +5,10 @@
 
 import { supabase } from '@/lib/supabase';
 
-interface TableCheckResult {
-  exists: boolean;
-  missingColumns?: string[];
-}
+// interface TableCheckResult {
+//   exists: boolean;
+//   missingColumns?: string[];
+// } // Not used
 
 /**
  * Check if a table exists by attempting to query it

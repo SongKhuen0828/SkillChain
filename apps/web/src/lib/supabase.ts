@@ -28,5 +28,6 @@ export interface UserProfile {
   org_id?: string // Organization ID for org_admin and org members
   profile_public?: boolean // Whether profile is discoverable by organizations
   verification_status?: 'pending' | 'approved' | 'rejected' // For educators
+  ai_companion_enabled?: boolean // Whether AI companion is enabled
 }
 

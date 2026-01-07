@@ -58,27 +58,15 @@ interface AdaptationLog {
   details?: any;
 }
 
-interface StudyPlanRecord {
-  id: string;
-  course_id: string;
-  schedule?: any[];
-  adaptation_logs?: AdaptationLog[];
-  available_days?: any[];
-  target_date?: string;
-}
-
 export function SchedulePage() {
   const { user, profile } = useAuth();
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [studyPlans, setStudyPlans] = useState<StudyPlan[]>([]);
-  const [sessions, setSessions] = useState<StudySession[]>([]);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [adaptationLogs, setAdaptationLogs] = useState<AdaptationLog[]>([]);
-  const [aiRecommendedMethod, setAiRecommendedMethod] = useState<string | null>(null);
   const [showAllTasks, setShowAllTasks] = useState(false);
-  const [bestFocusWindow, setBestFocusWindow] = useState<{ start: number; end: number } | null>(null);
   const [hasEnrolledCourses, setHasEnrolledCourses] = useState(false);
   const [stats, setStats] = useState({
     mostProductiveHour: 10,
@@ -134,6 +122,8 @@ export function SchedulePage() {
       
       try {
         // STEP 1: Fetch study plans (simple query, no joins) - Only pending plans
+        if (!user) return;
+        
         const { data: plansData, error: plansError } = await supabase
           .from('study_plans')
           .select('id, lesson_id, scheduled_at, status')
@@ -234,7 +224,7 @@ export function SchedulePage() {
         const { data: sessionsData, error: sessionsError } = await supabase
           .from('study_sessions')
           .select('started_at, method_used, completed, duration_seconds')
-          .eq('user_id', user.id)
+          .eq('user_id', user!.id)
           .order('started_at', { ascending: false })
           .limit(100);
 
@@ -246,7 +236,7 @@ export function SchedulePage() {
           const { data: planRecords, error: planRecordsError } = await supabase
             .from('study_plans')
             .select('adaptation_logs')
-            .eq('user_id', user.id)
+            .eq('user_id', user!.id)
             .not('adaptation_logs', 'is', null)
             .limit(10);
 
@@ -359,7 +349,7 @@ export function SchedulePage() {
     }
 
     setStats({
-      mostProductiveHour: parseInt(mostProductiveHour),
+      mostProductiveHour: parseInt(String(mostProductiveHour)),
       bestMethod,
       completionRate,
       avgSessionDuration: Math.round(avgDuration)
@@ -404,9 +394,10 @@ export function SchedulePage() {
         console.warn('Error fetching user preferences:', prefsError);
       }
 
+      if (!user) return;
+      
       // Get weekly hours commitment (default to 10 hours if not set)
       const weeklyHours = userPreferences?.hours?.[0] || 10;
-      const userGoal = userPreferences?.goal || 'explore';
       const preferredTime = userPreferences?.preferred_study_time || 'flexible';
 
       // STEP 1: Get user's completed lessons

@@ -158,3 +158,80 @@ export async function mintCertificateNFT(
     return realMinting(studentAddress, studentName, courseTitle, metadataURI, contractAddress);
   }
 }
+
+/**
+ * Upload certificate image and metadata to IPFS, then mint NFT
+ * This is a convenience function that combines IPFS upload and minting
+ */
+export async function uploadAndMintCertificate(
+  certificateElement: HTMLElement,
+  studentAddress: string,
+  studentName: string,
+  courseTitle: string,
+  courseId: string,
+  userId: string,
+  completionDate: string,
+  educatorName?: string
+): Promise<{ transactionHash: string; tokenId: bigint; ipfsHash: string }> {
+  // Import IPFS functions dynamically
+  const { uploadImageToIPFS, uploadMetadataToIPFS, getIPFSUri } = await import('@/lib/ipfs/pinata');
+  const html2canvas = (await import('html2canvas')).default;
+
+  // 1. Generate certificate image
+  const canvas = await html2canvas(certificateElement, {
+    scale: 2,
+    useCORS: true,
+    logging: false,
+    backgroundColor: "#ffffff",
+  });
+
+  // Convert canvas to blob
+  const imageBlob = await new Promise<Blob>((resolve) => {
+    canvas.toBlob((blob) => {
+      resolve(blob!);
+    }, "image/png", 0.95);
+  });
+
+  // 2. Upload image to IPFS
+  const imageHash = await uploadImageToIPFS(imageBlob, `certificate-${courseId}-${userId}.png`);
+  const imageUrl = `ipfs://${imageHash}`;
+
+  // 3. Prepare metadata
+  const metadata = {
+    name: "SkillChain Certificate of Completion",
+    description: `This certifies that ${studentName} has successfully completed the course "${courseTitle}"`,
+    image: imageUrl,
+    attributes: [
+      { trait_type: "Student Name", value: studentName },
+      { trait_type: "Course Title", value: courseTitle },
+      { trait_type: "Completion Date", value: completionDate },
+      { trait_type: "Instructor", value: educatorName || "SkillChain Team" },
+      { trait_type: "Certificate Type", value: "Course Completion" },
+    ],
+  };
+
+  // 4. Upload metadata to IPFS
+  const metadataHash = await uploadMetadataToIPFS(metadata, `certificate-metadata-${courseId}-${userId}.json`);
+  const metadataURI = getIPFSUri(metadataHash);
+
+  // 5. Get contract address
+  const contractAddress = import.meta.env.VITE_CERTIFICATE_CONTRACT_ADDRESS;
+  if (!contractAddress) {
+    throw new Error("VITE_CERTIFICATE_CONTRACT_ADDRESS is not set in environment variables");
+  }
+
+  // 6. Mint NFT
+  const { transactionHash, tokenId } = await mintCertificateNFT(
+    studentAddress,
+    studentName,
+    courseTitle,
+    metadataURI,
+    contractAddress
+  );
+
+  return {
+    transactionHash,
+    tokenId,
+    ipfsHash: metadataHash,
+  };
+}

@@ -807,7 +807,7 @@ export function Settings() {
                                 console.error('Error fetching membership:', membershipError)
                               }
                               
-                              if (membership?.organizations && !Array.isArray(membership.organizations)) {
+                              if (membership?.organizations && !Array.isArray(membership.organizations) && typeof membership.organizations === 'object' && 'name' in membership.organizations) {
                                 setCurrentOrg(membership.organizations)
                                 toast.success(`Welcome to ${membership.organizations.name}!`)
                               } else {

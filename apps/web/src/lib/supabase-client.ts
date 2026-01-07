@@ -41,10 +41,11 @@ export const safeSupabase = {
         return {
           ...insertQuery,
           select: async (columns?: string) => {
-            return (await safeSupabaseQuery(
+            // @ts-ignore - Supabase type definition issue, works at runtime
+            return await safeSupabaseQuery(
               () => insertQuery.select(columns),
               { operation: `insert into ${table}`, fallback: null }
-            )) as any;
+            );
           },
         };
       },
@@ -57,10 +58,11 @@ export const safeSupabase = {
             return {
               ...eqQuery,
               select: async (columns?: string) => {
-                return (await safeSupabaseQuery(
+                // @ts-ignore - Supabase type definition issue, works at runtime
+                return await safeSupabaseQuery(
                   () => eqQuery.select(columns),
                   { operation: `update ${table}`, fallback: null }
-                )) as any;
+                );
               },
             };
           },
@@ -71,10 +73,11 @@ export const safeSupabase = {
         return {
           ...upsertQuery,
           select: async (columns?: string) => {
-            return (await safeSupabaseQuery(
+            // @ts-ignore - Supabase type definition issue, works at runtime
+            return await safeSupabaseQuery(
               () => upsertQuery.select(columns),
               { operation: `upsert into ${table}`, fallback: null }
-            )) as any;
+            );
           },
         };
       },

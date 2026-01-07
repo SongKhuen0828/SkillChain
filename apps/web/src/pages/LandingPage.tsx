@@ -12,7 +12,7 @@ import {
   Sparkles, 
   Award,
   ArrowRight,
-  CheckCircle2,
+  // CheckCircle2, // Not used
   Search,
   BookOpen,
   Zap,

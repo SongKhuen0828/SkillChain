@@ -16,11 +16,11 @@ import {
   Key,
   Camera,
   Users,
-  BookOpen,
+  // BookOpen, // Not used
   Save,
   Loader2,
   RefreshCw,
-  Edit2,
+  // Edit2, // Not used
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
@@ -35,7 +35,7 @@ export function EducatorProfile() {
   const [saving, setSaving] = useState(false)
   const [changingPassword, setChangingPassword] = useState(false)
   const [uploading, setUploading] = useState(false)
-  const [isEditingProfile, setIsEditingProfile] = useState(false)
+  // const [isEditingProfile, setIsEditingProfile] = useState(false) // Not used
   const [activeTab, setActiveTab] = useState<TabValue>('account')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -44,7 +44,7 @@ export function EducatorProfile() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [email, setEmail] = useState('')
   const [verificationStatus, setVerificationStatus] = useState<'pending' | 'approved' | 'rejected' | null>(null)
-  const [verificationDate, setVerificationDate] = useState<string | null>(null)
+  // const [verificationDate, setVerificationDate] = useState<string | null>(null) // Not used
 
   // Professional info state
   const [professionalTitle, setProfessionalTitle] = useState('')

@@ -60,7 +60,7 @@ export const safeSupabase = {
                 return await safeSupabaseQuery(
                   () => eqQuery.select(columns),
                   { operation: `update ${table}`, fallback: null }
-                );
+                ) as Promise<{ data: null; error: any }>;
               },
             };
           },
@@ -74,7 +74,7 @@ export const safeSupabase = {
             return await safeSupabaseQuery(
               () => upsertQuery.select(columns),
               { operation: `upsert into ${table}`, fallback: null }
-            );
+            ) as Promise<{ data: null; error: any }>;
           },
         };
       },

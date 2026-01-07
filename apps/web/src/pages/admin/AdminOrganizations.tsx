@@ -62,9 +62,6 @@ export function AdminOrganizations() {
     email: string;
     password: string;
     orgName: string;
-    emailSent: boolean;
-    emailProvider?: string;
-    emailError?: string | null;
   } | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   
@@ -191,9 +188,6 @@ export function AdminOrganizations() {
         email: data.user.email,
         password: data.user.tempPassword,
         orgName: newOrgName,
-        emailSent: data.emailSent,
-        emailProvider: data.emailProvider || null,
-        emailError: data.emailError || null,
       });
       
       setShowCreateDialog(false);
@@ -207,13 +201,7 @@ export function AdminOrganizations() {
       setNewContactName('');
       
       fetchOrganizations();
-      
-      if (data.emailSent) {
-        const provider = data.emailProvider ? ` via ${data.emailProvider}` : '';
-        toast.success(`Organization created and welcome email sent${provider}!`);
-      } else {
-        toast.success('Organization created! Please share credentials manually.');
-      }
+      toast.success('Organization created! Please share the credentials with the admin.');
     } catch (error: any) {
       console.error('Error creating organization:', error);
       toast.error(error.message || 'Failed to create organization');
@@ -399,7 +387,7 @@ export function AdminOrganizations() {
                 <Alert className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-cyan-500/30">
                   <Send className="h-4 w-4 text-cyan-500" />
                   <AlertDescription className="text-sm text-slate-700 dark:text-slate-300">
-                    ✨ A welcome email with login credentials will be sent to this address.
+                    📧 You will need to manually send the login credentials to this email address after creation.
                   </AlertDescription>
                 </Alert>
               </motion.div>
@@ -421,7 +409,7 @@ export function AdminOrganizations() {
                 ) : (
                   <>
                     <Plus className="h-4 w-4 mr-2" />
-                    Create & Send Email
+                    Create Organization
                   </>
                 )}
               </Button>
@@ -445,10 +433,7 @@ export function AdminOrganizations() {
                 Organization Created!
               </DialogTitle>
               <DialogDescription className="text-center text-slate-600 dark:text-slate-400">
-                {createdCredentials?.emailSent 
-                  ? `✨ A welcome email has been sent to ${createdCredentials?.email}${createdCredentials?.emailProvider ? ` via ${createdCredentials.emailProvider}` : ''}`
-                  : 'Please share the login credentials with the admin manually.'
-                }
+                Please share the login credentials with the organization administrator manually.
               </DialogDescription>
             </DialogHeader>
             
@@ -520,41 +505,20 @@ export function AdminOrganizations() {
                   </div>
                 </div>
                 
-                {!createdCredentials.emailSent && (
-                  <Alert className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border-amber-500/30">
-                    <AlertDescription className="text-sm text-slate-700 dark:text-slate-300">
-                      {createdCredentials.emailError ? (
-                        <>
-                          ⚠️ <strong>Email failed:</strong> {createdCredentials.emailError}
-                          <br />
-                          <span className="text-xs mt-1 block text-slate-600 dark:text-slate-400">
-                            Please share these credentials manually.
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          ⚠️ Email service not configured. Please share these credentials manually.
-                          <br />
-                          <span className="text-xs mt-2 block text-slate-600 dark:text-slate-400">
-                            To enable email sending, configure one of these in Supabase Dashboard → Functions → create-org-admin → Secrets:
-                            <br />
-                            <strong className="text-cyan-400">Option 1 (SMTP):</strong>
-                            <br />
-                            <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">SMTP_HOST</code>, <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">SMTP_PORT</code>, <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">SMTP_USER</code>, <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">SMTP_PASSWORD</code>
-                            <br />
-                            <strong className="text-cyan-400">Option 2 (API):</strong>
-                            <br />
-                            <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">SENDGRID_API_KEY</code> or <code className="bg-slate-700 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">RESEND_API_KEY</code>
-                            <br />
-                            <span className="text-xs mt-1 block text-slate-500 dark:text-slate-500">
-                              See <code className="bg-slate-700 dark:bg-slate-800 px-1 py-0.5 rounded">SMTP_SETUP.md</code> for SMTP configuration details
-                            </span>
-                          </span>
-                        </>
-                      )}
-                    </AlertDescription>
-                  </Alert>
-                )}
+                <Alert className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30">
+                  <AlertDescription className="text-sm text-slate-700 dark:text-slate-300">
+                    <div className="flex items-start gap-2">
+                      <Send className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <strong className="text-blue-600 dark:text-blue-400">📧 Manual Email Required</strong>
+                        <br />
+                        <span className="text-xs mt-1 block text-slate-600 dark:text-slate-400">
+                          Please send these credentials to <strong>{createdCredentials.email}</strong> via your preferred email service.
+                        </span>
+                      </div>
+                    </div>
+                  </AlertDescription>
+                </Alert>
               </motion.div>
             )}
             

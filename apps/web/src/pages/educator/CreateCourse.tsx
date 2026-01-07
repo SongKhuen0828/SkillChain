@@ -81,7 +81,7 @@ export function CreateCourse() {
 
     try {
       // Generate unique file path
-      const fileExt = file.name.split('.').pop()
+      const _fileExt = file.name.split('.').pop()
       const fileName = `${Date.now()}_${file.name}`
       const filePath = `thumbnails/${user.id}/${fileName}`
 

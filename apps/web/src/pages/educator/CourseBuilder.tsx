@@ -1556,7 +1556,7 @@ export default function CourseBuilder() {
                           size="icon"
                           className="text-slate-400 hover:text-cyan-400"
                           onClick={() => window.open(lessonVideoUrl, '_blank')}
-                          title="Preview Video"
+                                // title="Preview Video" // Not supported by Lucide icons
                         >
                           <ExternalLink className="h-4 w-4" />
                         </Button>

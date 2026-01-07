@@ -15,7 +15,7 @@ import {
   ShieldAlert,
   Key,
   Camera,
-  Users,
+  // Users, // Not used
   // BookOpen, // Not used
   Save,
   Loader2,
@@ -44,7 +44,7 @@ export function EducatorProfile() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [email, setEmail] = useState('')
   const [verificationStatus, setVerificationStatus] = useState<'pending' | 'approved' | 'rejected' | null>(null)
-  // const [verificationDate, setVerificationDate] = useState<string | null>(null) // Not used
+  const [verificationDate, setVerificationDate] = useState<string | null>(null) // Keep for setVerificationDate usage
 
   // Professional info state
   const [professionalTitle, setProfessionalTitle] = useState('')

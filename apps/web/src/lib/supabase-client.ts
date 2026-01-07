@@ -23,16 +23,16 @@ export const safeSupabase = {
           ...query,
           eq: (column: string, value: any) => safeSupabase.from(table).select(columns, options).eq(column, value),
           single: async () => {
-            return safeSupabaseQuery(
+            return await safeSupabaseQuery(
               () => query.single(),
               { operation: `select from ${table}` }
-            );
+            ) as unknown as Promise<{ data: unknown; error: any }>;
           },
           maybeSingle: async () => {
-            return safeSupabaseQuery(
+            return await safeSupabaseQuery(
               () => query.maybeSingle(),
               { operation: `select from ${table}` }
-            );
+            ) as unknown as Promise<{ data: unknown; error: any }>;
           },
         };
       },
@@ -41,10 +41,11 @@ export const safeSupabase = {
         return {
           ...insertQuery,
           select: async (columns?: string) => {
-            return await safeSupabaseQuery(
+            const result = await safeSupabaseQuery(
               () => insertQuery.select(columns),
               { operation: `insert into ${table}`, fallback: null }
-            ) as unknown as Promise<{ data: null; error: any }>;
+            );
+            return result as unknown as Promise<{ data: null; error: any }>;
           },
         };
       },
@@ -57,10 +58,11 @@ export const safeSupabase = {
             return {
               ...eqQuery,
               select: async (columns?: string) => {
-                return await safeSupabaseQuery(
+                const result = await safeSupabaseQuery(
                   () => eqQuery.select(columns),
                   { operation: `update ${table}`, fallback: null }
-                ) as unknown as Promise<{ data: null; error: any }>;
+                );
+                return result as unknown as Promise<{ data: null; error: any }>;
               },
             };
           },

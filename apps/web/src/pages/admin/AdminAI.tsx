@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { 
   Brain, 
-  CheckCircle2,
+  // CheckCircle2, // Not used
   // XCircle, // Not used
   RefreshCw,
   Zap,

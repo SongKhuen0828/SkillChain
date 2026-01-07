@@ -3,7 +3,7 @@
  * Wraps Supabase calls and automatically retries with schema repair on errors
  */
 
-import { supabase } from '@/lib/supabase';
+// import { supabase } from '@/lib/supabase'; // Not used
 
 interface ErrorWithCode extends Error {
   code?: string;

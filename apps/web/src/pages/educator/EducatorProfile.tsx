@@ -44,7 +44,7 @@ export function EducatorProfile() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [email, setEmail] = useState('')
   const [verificationStatus, setVerificationStatus] = useState<'pending' | 'approved' | 'rejected' | null>(null)
-  const [verificationDate, setVerificationDate] = useState<string | null>(null) // Keep for setVerificationDate usage
+  const [_verificationDate, setVerificationDate] = useState<string | null>(null) // Keep for setVerificationDate usage
 
   // Professional info state
   const [professionalTitle, setProfessionalTitle] = useState('')
@@ -165,7 +165,7 @@ export function EducatorProfile() {
         toast.success('Profile updated successfully!')
       }
 
-      setIsEditingProfile(false)
+      // setIsEditingProfile(false) // Not used
     } catch (error: any) {
       console.error('Error updating profile:', error)
       toast.error(error.message || 'Failed to update profile')

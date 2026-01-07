@@ -40,12 +40,11 @@ export const safeSupabase = {
         const insertQuery = original.insert(values);
         return {
           ...insertQuery,
-          select: async (columns?: string) => {
-            const result = await safeSupabaseQuery(
+          select: (columns?: string) => {
+            return safeSupabaseQuery(
               () => insertQuery.select(columns),
               { operation: `insert into ${table}`, fallback: null }
-            );
-            return result as unknown as Promise<{ data: null; error: any }>;
+            ) as any;
           },
         };
       },
@@ -57,12 +56,11 @@ export const safeSupabase = {
             const eqQuery = updateQuery.eq(column, value);
             return {
               ...eqQuery,
-              select: async (columns?: string) => {
-                const result = await safeSupabaseQuery(
+              select: (columns?: string) => {
+                return safeSupabaseQuery(
                   () => eqQuery.select(columns),
                   { operation: `update ${table}`, fallback: null }
-                );
-                return result as unknown as Promise<{ data: null; error: any }>;
+                ) as any;
               },
             };
           },
@@ -72,11 +70,11 @@ export const safeSupabase = {
         const upsertQuery = original.upsert(values);
         return {
           ...upsertQuery,
-          select: async (columns?: string) => {
-            return await safeSupabaseQuery(
+          select: (columns?: string) => {
+            return safeSupabaseQuery(
               () => upsertQuery.select(columns),
               { operation: `upsert into ${table}`, fallback: null }
-            ) as unknown as Promise<{ data: null; error: any }>;
+            ) as any;
           },
         };
       },

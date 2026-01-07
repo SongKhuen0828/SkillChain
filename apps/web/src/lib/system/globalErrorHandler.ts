@@ -15,7 +15,7 @@ interface ErrorWithCode extends Error {
 /**
  * Schema repair payloads for common errors
  */
-async function attemptSchemaRepair(error: ErrorWithCode, operation: string): Promise<boolean> {
+async function attemptSchemaRepair(error: ErrorWithCode, _operation: string): Promise<boolean> {
   // Check if it's a schema/column error
   if (error.code === 'PGRST204' || error.code === '42703') {
     // Column doesn't exist

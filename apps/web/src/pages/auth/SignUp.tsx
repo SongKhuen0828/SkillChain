@@ -147,10 +147,14 @@ export default function SignUp() {
 
       // If joined with invite code, increment the use count
       if (inviteInfo) {
-        await supabase.rpc('use_invite_code', {
-          invite_code: inviteInfo.code,
-          user_id: (await supabase.auth.getUser()).data.user?.id,
-        }).catch(err => console.warn('Could not update invite code:', err))
+        try {
+          await supabase.rpc('use_invite_code', {
+            invite_code: inviteInfo.code,
+            user_id: (await supabase.auth.getUser()).data.user?.id,
+          })
+        } catch (err: any) {
+          console.warn('Could not update invite code:', err)
+        }
       }
 
       navigate('/dashboard')

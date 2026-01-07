@@ -13,8 +13,8 @@ import {
   Building2,
   GraduationCap,
   BookOpen,
-  Crown,
-  ChevronDown
+  Crown
+  // ChevronDown // Not used
 } from 'lucide-react';
 import { toast } from 'sonner';
 import {

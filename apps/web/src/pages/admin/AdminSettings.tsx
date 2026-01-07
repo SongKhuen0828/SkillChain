@@ -16,8 +16,8 @@ import {
   Cloud,
   Link as LinkIcon,
   Key,
-  Palette,
-  Mail,
+  // Palette, // Not used
+  // Mail, // Not used
   Server,
   CheckCircle2,
   XCircle,

@@ -535,7 +535,7 @@ export function LearnerCourses() {
       </div>
 
       {/* Tabs & Content */}
-      <Tabs defaultValue="browse" value={activeTab} onValueChange={setActiveTab} className="w-full space-y-6">
+      <Tabs defaultValue="browse" value={activeTab} onValueChange={(v) => setActiveTab(v as typeof activeTab)} className="w-full space-y-6">
         {/* TabsList and Search */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <TabsList className="bg-slate-900/80 border border-slate-800 p-1 h-auto">

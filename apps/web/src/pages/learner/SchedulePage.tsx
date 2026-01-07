@@ -339,8 +339,9 @@ export function SchedulePage() {
       }
     });
 
-    const _bestWindow = Object.entries(windowScores)
-      .sort((a, b) => b[1] - a[1])[0]?.[0];
+    // Calculate best window (not used in UI currently)
+    // const bestWindow = Object.entries(windowScores)
+    //   .sort((a, b) => b[1] - a[1])[0]?.[0];
 
     // Removed setBestFocusWindow and setAiRecommendedMethod - not used in UI
 

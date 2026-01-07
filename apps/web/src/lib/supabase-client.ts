@@ -21,7 +21,7 @@ export const safeSupabase = {
         const query = original.select(columns, options);
         return {
           ...query,
-          eq: (column: string, value: any) => safeSupabase.from(table).select(columns, options).eq(column, value),
+          eq: (column: string, value: any): any => safeSupabase.from(table).select(columns, options).eq(column, value),
           single: async () => {
             return await safeSupabaseQuery(
               () => query.single(),
